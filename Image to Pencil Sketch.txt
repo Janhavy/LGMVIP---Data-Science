@@ -1,0 +1,25 @@
+import cv2
+
+#reading the image
+img = cv2.imread("C:/Users/HP PAVILION(23044)/Pictures/Myself.jpg")
+cv2.imshow("Original Image", img)
+
+#converting the image into gray image
+gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+#inverting the gray image
+inverted_image = 255 - gray_image
+
+#bluring the image using Gaussian Function
+blurred = cv2.GaussianBlur(inverted_image, (21, 21), 0)
+
+#inverting the blurred image
+inverted_blurred = 255 - blurred
+
+#mixing gray image with inverted blurred image to get pencil sketch
+pencil_sketch = cv2.divide(gray_image, inverted_blurred, scale=256.0)
+
+#displaying the sketch
+cv2.imshow("Sketch", pencil_sketch)
+
+cv2.waitKey(0)
